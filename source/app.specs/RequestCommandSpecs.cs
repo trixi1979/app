@@ -21,7 +21,7 @@ namespace app.specs
         request = fake.an<IProvideRequestDetails>();
         depends.on<IMatchARequest>(x =>
         {
-          x.ShouldEqual(request);
+          x.ShouldEqual(request); 
           return true;
         });
       };
