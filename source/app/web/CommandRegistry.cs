@@ -1,25 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace app.web
 {
     public class CommandRegistry : IFindCommandsThatCanProcessRequests
     {
-        private readonly IEnumerable<IProcessOneRequest> _allCommands;
+        private readonly IEnumerable<IProcessOneRequest> _all_commands;
 
         public CommandRegistry(IEnumerable<IProcessOneRequest> all_commands)
         {
-            _allCommands = all_commands;
+            _all_commands = all_commands;
         }
 
         public IProcessOneRequest get_the_command_that_can_process(IProvideRequestDetails request)
         {
-            foreach (var command in _allCommands)
-            {
-                if (command.can_process(request))
-                    return command;
-            }
-            return null;
+            return _all_commands.FirstOrDefault(x => x.can_process(request));
         }
     }
 }
