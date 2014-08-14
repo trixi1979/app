@@ -1,10 +1,11 @@
-﻿using app.web.application.catalog_browsing.stubs;
+﻿using System.Security.Cryptography.X509Certificates;
+using app.web.application.catalog_browsing.stubs;
 using app.web.aspnet;
 using app.web.core;
 
 namespace app.web.application.catalog_browsing
 {
-  public class ViewTheDepartmentsOfDepartment : ISupportAUserStory
+    public class ViewTheDepartmentsOfDepartment : ISupportAUserStory
   {
     IFindDepartments department_finder;
     IDisplayInformation display;

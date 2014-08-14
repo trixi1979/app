@@ -10,11 +10,11 @@ using Machine.Specifications;
 
 namespace app.specs
 {
-    [Subject(typeof(ViewTheProductsInADepartment))]
-    public class ViewTheProductsInADepartmentSpecs
+    [Subject(typeof(ViewCatalog<ProductsInDepartmentInput, ProductInfoItem>))]
+    public class ViewCatalogSpecs
     {
         public abstract class concern : Observes<ISupportAUserStory,
-            ViewTheProductsInADepartment>
+            ViewCatalog<ProductsInDepartmentInput, ProductInfoItem>>
         {
         }
 
@@ -25,13 +25,13 @@ namespace app.specs
             Establish c = () =>
             {
                 display_engine = depends.on<IDisplayInformation>();
-                product_finder = depends.on<IFindProductsInADepartment>();
+                product_finder = depends.on<IFind<ProductsInDepartmentInput, ProductInfoItem>>();
                 input = new ProductsInDepartmentInput();
                 request = fake.an<IProvideRequestDetails>();
                 request.setup(x => x.map<ProductsInDepartmentInput>()).Return(input);
                 products = new List<ProductInfoItem>();
 
-                product_finder.setup(x => x.get_products_of_department(input)).Return(products);
+                product_finder.setup(x => x.find_items(input)).Return(products);
             };
 
             Because b = () =>
